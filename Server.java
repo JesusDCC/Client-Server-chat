@@ -152,11 +152,13 @@ public class Server
     while((data.charAt(data.length()-1))!='\n'){
       buffer.clear();
       sc.read( buffer );
+
       buffer.flip();
       data+=decoder.decode(buffer).toString();
+      
     }
-
     String[] message = data.split("\n");
+
 
 
     int size = message.length;
@@ -175,7 +177,6 @@ public class Server
             
           }
           else{
-            System.out.println(actual);
             actual.socket.write(ByteBuffer.wrap("OK".getBytes(charset)));
             String oldNick = actual.nick;
             actual.nick = verifyInput[1];

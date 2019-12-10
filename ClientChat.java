@@ -88,7 +88,8 @@ public class ClientChat  implements Runnable  {
         // PREENCHER AQUI com código que envia a mensagem ao servidor
         buffer.clear();
         buffer.rewind();
-        buffer.put(message.getBytes());
+        String msg = message+'\n';
+        buffer.put(msg.getBytes());
         buffer.flip();
         socket.write(buffer);    
         buffer.clear();

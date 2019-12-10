@@ -145,13 +145,19 @@ public class Server
     }
 
 
-
+    Client actual = getClient(sc);
 
     // Decode and print the message to stdout
     String data = decoder.decode(buffer).toString();
+    while((data.charAt(data.length()-1))!='\n'){
+      buffer.clear();
+      sc.read( buffer );
+      buffer.flip();
+      data+=decoder.decode(buffer).toString();
+    }
+
     //System.out.println("string"+ data);
 
-    Client actual = getClient(sc);
     /*int index = data.indexOf("EOF");
     System.out.println("index: " + index);
     while(index!=-1){
@@ -184,6 +190,7 @@ public class Server
             
           }
           else{
+            System.out.println(actual);
             actual.socket.write(ByteBuffer.wrap("OK".getBytes(charset)));
             String oldNick = actual.nick;
             actual.nick = verifyInput[1];
@@ -298,12 +305,10 @@ public class Server
 
   static Client getClient(SocketChannel sc){
     for(Client c: clientList){
-      if(c.nick!=null){
         if(c.socket==sc){
           return c;
         }
       }
-    }
     return null;
   }
 

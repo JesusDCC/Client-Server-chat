@@ -156,21 +156,6 @@ public class Server
       data+=decoder.decode(buffer).toString();
     }
 
-    //System.out.println("string"+ data);
-
-    /*int index = data.indexOf("EOF");
-    System.out.println("index: " + index);
-    while(index!=-1){
-      String left = data.substring(0,index);
-      buffer.clear();
-      sc.read( buffer );
-      buffer.flip();
-
-      String right = decoder.decode(buffer).toString();
-      System.out.println("here"+right);
-      data = left + "" + right;
-      index = data.indexOf("<CTRL-D>");
-    }*/
     String[] message = data.split("\n");
 
 
